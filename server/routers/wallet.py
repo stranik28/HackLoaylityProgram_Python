@@ -11,21 +11,18 @@ async def get_wallet(
         session: AsyncSession = Depends(get_session)
 ):
     return {
-        "code": 200,
-        "body": {
-            "balance": 2000,
-            "operations": [
-                {
-                    "logo": "https://cdn.discordapp.com/attachments",
-                    "amount": 300,
-                    "name": "O'key store"
-                },
-                {
-                    "logo": "https://cdn.discordapp.com",
-                    "amount": -10,
-                    "name": "Beach icecream"
-                }
+        "balance": 2000,
+        "operations": [
+            {
+                "logo": "https://cdn.discordapp.com/attachments",
+                "amount": 300,
+                "name": "O'key store"
+            },
+            {
+                "logo": "https://cdn.discordapp.com",
+                "amount": -10,
+                "name": "Beach icecream"
+            }
 
-            ]
-        }
+        ]
     }
