@@ -33,15 +33,15 @@ async def send_wallet_bonus(
         session: AsyncSession = Depends(get_session)
 
 ):
-    await WalletManager.send_wallet_bonus(receiver_id=receiver_id, user_id=user_id, session=session, amount=amount)
+    await WalletManager.spend_wallet_bonus(receiver_id=receiver_id, user_id=user_id, session=session, amount=amount)
 
 
 @router.post('/spend_bonus', status_code=200)
-async def send_wallet_bonus(
+async def spend_wallet_bonus(
         receiver_id: int,
         amount: int,
         user_id: int = Depends(get_auth_account_id),
         session: AsyncSession = Depends(get_session)
 
 ):
-    await WalletManager.spend_wallet_bonus(receiver_id=receiver_id, user_id=user_id, session=session, amount=amount)
+    await WalletManager.spend_wallet_bonus(receiver_id=receiver_id, user_id=user_id, session=session, amount=-amount)
