@@ -14,7 +14,7 @@ from db.models.users import DBUser
 class DBPassword(BaseModel):
     __tablename__ = "password"
 
-    user_id = Column(Integer, ForeignKey('user.id', ondelete="RESTRICT"), nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id', ondelete="RESTRICT"), nullable=False)
 
     password = Column(Text)
 

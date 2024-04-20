@@ -21,7 +21,9 @@ fileConfig(config.config_file_name)     # type: ignore
 # for 'autogenerate' support
 from db.models.users import DBUser
 from db.models.password import DBPassword
-
+from db.models.company import DBCompany
+from db.models.operations import DBOperation
+from db.models.wallet import DBWallet
 target_metadata = Base.metadata
 
 config.set_main_option("sqlalchemy.url", db_url)

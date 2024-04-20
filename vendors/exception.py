@@ -12,3 +12,7 @@ class PasswordNotCorrect(Exception):
 
 class UsernameNotUnique(Exception):
     pass
+
+
+class NegativeBalanceException(Exception):
+    pass

@@ -2,6 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from db.models.users import DBUser
 from db.repository.auth import AuthRepository
+from db.repository.wallet import WalletRepository
 from vendors.exception import UsernameNotUnique, RowNotFound, PasswordNotCorrect
 
 import hashlib
@@ -21,8 +22,9 @@ class AuthManager:
         hash_object.update(SALT + password.encode())  # Get the hex digest of the hash
         password = hash_object.hexdigest()
         await AuthRepository(session).register_user(username=username, password=password)
-
-        return await AuthRepository(session).get_user_by_username(username=username)
+        user = await AuthRepository(session).get_user_by_username(username=username)
+        await WalletRepository(session).create_wallet(user_id=user[0].id)
+        return user[0]
 
     @staticmethod
     async def login(session, username: str, password_user: str) -> DBUser:

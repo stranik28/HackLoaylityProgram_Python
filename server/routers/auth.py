@@ -17,7 +17,7 @@ from vendors.exception import RowNotFound, PasswordNotCorrect, UsernameNotUnique
 router = APIRouter(prefix="/auth", tags=['Auth'])
 
 
-@router.post('/registration', status_code=202)
+@router.post('/registration', status_code=202, response_model=ResponseUser)
 async def verification_code(
         registration_data: RequestRegistration,
         session: AsyncSession = Depends(get_session)
@@ -27,7 +27,7 @@ async def verification_code(
                                           password=registration_data.password)
     except UsernameNotUnique:
         raise HTTPException(status_code=400, detail="Пользователь с таким username уже зарегистрирован")
-    return ResponseAuthFactory.get_user(user=user[0])
+    return ResponseAuthFactory.get_user(user=user)
 
 
 @router.post('/login', response_model=ResponseUser)
