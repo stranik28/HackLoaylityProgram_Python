@@ -34,4 +34,4 @@ class WalletManager:
     @staticmethod
     async def spend_wallet_bonus(receiver_id: int, user_id: int, session: AsyncSession, amount: int):
         company = await WalletRepository(session).get_compony_employee(user_id)
-        await WalletRepository(session).make_operation(amount=-amount, user_id=receiver_id, company_id=company.id)
+        await WalletRepository(session).make_operation(amount=amount, user_id=receiver_id, company_id=company.id)
