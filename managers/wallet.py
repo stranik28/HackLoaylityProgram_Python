@@ -1,5 +1,4 @@
 import io
-from PIL import Image
 
 from sqlalchemy.ext.asyncio import AsyncSession
 

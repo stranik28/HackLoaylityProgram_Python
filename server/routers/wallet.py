@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Response
 
-from api.response.wallet import WalletResponseFactory
+from api.response.wallet import WalletResponseFactory, WalletResponse
 from managers.wallet import WalletManager
 from server.depends import get_session, get_auth_account_id
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 router = APIRouter(prefix='/wallet', tags=['wallet'])
 
 
-@router.get('/')
+@router.get('/', response_model=WalletResponse)
 async def get_wallet(
         user_id: int = Depends(get_auth_account_id),
         session: AsyncSession = Depends(get_session)
