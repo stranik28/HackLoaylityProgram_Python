@@ -6,6 +6,7 @@ from server.depends import get_session, get_auth_account_id
 from sqlalchemy.ext.asyncio import AsyncSession
 
 router = APIRouter(prefix='/wallet', tags=['wallet'])
+ride_router = APIRouter(prefix="ride", tags=["ride"])
 
 
 @router.get('/', response_model=WalletResponse)
@@ -45,3 +46,13 @@ async def spend_wallet_bonus(
 
 ):
     await WalletManager.spend_wallet_bonus(receiver_id=receiver_id, user_id=user_id, session=session, amount=-amount)
+
+
+@ride_router.get('/touch_esp/{esp_id}/{uuid}', status_code=200)
+async def touch(
+        uuid: str,
+        esp_id: int,
+        session: AsyncSession = Depends(get_session)
+):
+    print(f"Ought uuid is {uuid} from esp {esp_id}")
+    return {"result": uuid}
