@@ -26,7 +26,8 @@ async def verification_code(
         user = await AuthManager.register(session=session, username=registration_data.username,
                                           password=registration_data.password)
     except UsernameNotUnique:
-        raise HTTPException(status_code=400, detail="Пользователь с таким username уже зарегистрирован")
+        user: DBUser = await AuthManager.login(session=session, username=registration_data.username,
+                                               password_user=registration_data.password)
     return ResponseAuthFactory.get_user(user=user)
 
 
@@ -42,4 +43,4 @@ async def login_user(
         raise HTTPException(status_code=404, detail="Пользователя с таким username нет в системе")
     except PasswordNotCorrect:
         raise HTTPException(status_code=400, detail="Не верная связка username/пароль")
-    return ResponseAuthFactory.get_user(user=user[0])
+    return ResponseAuthFactory.get_user(user=user)

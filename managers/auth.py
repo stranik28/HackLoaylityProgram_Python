@@ -39,5 +39,6 @@ class AuthManager:
 
         if password != password_user:
             raise PasswordNotCorrect
-
-        return await AuthRepository(session).get_user_by_username(username=username)
+        user = await AuthRepository(session).get_user_by_username(username=username)
+        user = user[0]
+        return user
