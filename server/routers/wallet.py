@@ -6,7 +6,7 @@ from server.depends import get_session, get_auth_account_id
 from sqlalchemy.ext.asyncio import AsyncSession
 
 router = APIRouter(prefix='/wallet', tags=['wallet'])
-ride_router = APIRouter(prefix="ride", tags=["ride"])
+ride_router = APIRouter(prefix="/ride", tags=["ride"])
 
 
 @router.get('/', response_model=WalletResponse)
